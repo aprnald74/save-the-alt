@@ -40,10 +40,9 @@ public class Line_Maker : MonoBehaviour
             points.Clear();
         }
 
-
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetMouseButtonUp(0))
         {
-            Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+            Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         }
     }
 }
