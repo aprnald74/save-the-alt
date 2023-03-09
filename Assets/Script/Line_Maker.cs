@@ -12,6 +12,15 @@ public class Line_Maker : MonoBehaviour
     LineRenderer Ir;
     EdgeCollider2D col;
     List<Vector2> points = new List<Vector2>();
+    Rigidbody2D playerRIgidbody;
+
+    private float gravityScale;
+
+    private void Start()
+    {
+        playerRIgidbody = Player.GetComponent<Rigidbody2D>();
+        gravityScale = playerRIgidbody.gravityScale;
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,9 +49,25 @@ public class Line_Maker : MonoBehaviour
             points.Clear();
         }
 
-        if(Input.GetMouseButtonUp(0))
+        //if(Input.GetKey(KeyCode.S))
+        //{
+        //    Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+
+        //}
+        //if(Input.GetMouseButtonUp(0))
+        //{
+        //    Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        //}
+        if (Input.GetKey(KeyCode.A))
         {
-            Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            //Player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
+            //transform.position = lastPath;
+            playerRIgidbody.velocity = Vector2.zero;
+            playerRIgidbody.gravityScale = 0;
+        }
+        else
+        {
+            playerRIgidbody.gravityScale = gravityScale;
         }
     }
 }
