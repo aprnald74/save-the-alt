@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\Line_Maker.cs" />
+    <Compile Include="Assets\Script\Monster.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

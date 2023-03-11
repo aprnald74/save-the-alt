@@ -9,20 +9,20 @@ public class Line_Maker : MonoBehaviour
     public GameObject Player;
     public GameObject linePrefab;
 
+    //cnt는 그릴 수 있는 횟수 0이면 그릴수 있고, 1이면 못그림
     public int cnt;
 
     //라인
     LineRenderer Ir;
     EdgeCollider2D col;
     List<Vector2> points = new List<Vector2>();
+    List<Rigidbody2D> lines = new List<Rigidbody2D>();
     Rigidbody2D line;
 
     //player
     Rigidbody2D playerRIgidbody;
 
     private float gravityScale;
-
-    List<Rigidbody2D> lines = new List<Rigidbody2D>();
 
     private void Start()
     {
@@ -40,10 +40,6 @@ public class Line_Maker : MonoBehaviour
         playerRIgidbody.velocity = Vector2.zero;
         playerRIgidbody.gravityScale = 0;
 
-        //바로 위에 있는 코드랑 같음 라인에 중력 제거
-        
-        //line.velocity = Vector2.zero; 
-        //line.gravityScale = 0;
     }
 
     // Update is called once per frame
@@ -54,7 +50,10 @@ public class Line_Maker : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && cnt == 0)
         {
             GameObject go = Instantiate(linePrefab);
+
+            //라인 복제한거 lines리스트에 넣기
             lines.Add(go.GetComponent<Rigidbody2D>());
+
             Ir = go.GetComponent<LineRenderer>();
             col = go.GetComponent<EdgeCollider2D>();
             points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));                //현재 마우스 위치값 리스트에 저장
@@ -79,12 +78,13 @@ public class Line_Maker : MonoBehaviour
             //마우스를 떼면 그리고 있던 마지막 포인트를 지운다
             points.Clear();
 
-            //마우스 클릭을 떼면 중력값을 넣는다 (플레이어와 라인에)
+            //마우스 클릭을 떼면 중력값을 넣는다
             playerRIgidbody.gravityScale = gravityScale;
-            line.gravityScale = gravityScale;
 
 
             cnt++;
+
+            //lines 리스트에 있는 중력 값을 0에서 1로 바꿈
             foreach (Rigidbody2D line in lines)
             {
                 line.gravityScale = 1;
