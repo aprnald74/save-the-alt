@@ -1,35 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static UnityEngine.GraphicsBuffer;
 
 public class Monster : MonoBehaviour
 {
-
+    // 타켓 플레이어
     public Transform target;
-    public float speed;
 
+    // 몬스터 움직이는 속도
+    private float speed;
+
+    // 몬스터 살아있는지 여부 true면 살아 있는거
     private bool isLive;
+
+    private float angle;
 
     void Start()
     {
         isLive = true;
-        speed = 2;
+        speed = 1;
     }
 
     void Update()
     {
-        Vector3 dir = target.position - transform.position;
 
-        // 타겟 방향으로 다가감
-        transform.position += dir * speed * Time.deltaTime;
+        // 메인카메라에 있는 Line_Maker라는 스크립트에 있는 cnt가 1이랑 살아 있으면 움직임
+        if (GameObject.Find("Main Camera").GetComponent<Line_Maker>().cnt == 1 && isLive == true)
+        {
 
-        // 타겟 방향으로 회전함
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            //for(int i = 0; i < 10; i++)
+            //{
+            //    transform.Translate(Vector3.forward * speed);
+            //}
 
+            // 타겟에 위치값 알아옴
+            Vector3 dir = target.position - transform.position;
+
+            // 타겟 방향으로 다가감
+            transform.position += dir * speed * Time.deltaTime;
+
+            // 타겟 방향으로 회전함
+            angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        }
+    }
+
+    // 1번 : 처음 부딛힐때
+    private void OnCollisionEnter(Collision collision)
+    {
+        //몬스터한테 닿으면
+        if (collision.collider.CompareTag("태그"))
+        {
+                        
+        }
 
     }
+
 }

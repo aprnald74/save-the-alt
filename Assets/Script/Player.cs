@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -21,5 +23,17 @@ public class Player : MonoBehaviour
 
             
         }
+    }
+
+    // 1번 : 처음 부딛힐때
+    private void OnCollisionEnter(Collision collision)
+    {
+        //몬스터한테 닿으면
+        if (collision.collider.CompareTag("Monster"))
+        {
+            Debug.Log("몬스터한테 죽음");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
     }
 }
