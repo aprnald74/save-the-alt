@@ -56,13 +56,14 @@ public class Line_Maker : MonoBehaviour
 
             Ir = go.GetComponent<LineRenderer>();
             col = go.GetComponent<EdgeCollider2D>();
-            points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));                //현재 마우스 위치값 리스트에 저장
+            points.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));   //현재 마우스 위치값 리스트에 저장
             Ir.positionCount = 1;
             Ir.SetPosition(0, points[0]);
 
         }else if (Input.GetMouseButton(0) && cnt == 0)
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
             //밑에 있는 if문 없으면 자신의 위치에 이미 줄이 있는데 계속해서 같은 위치에 소환됨
             if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && cnt == 0)
             {

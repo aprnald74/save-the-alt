@@ -25,15 +25,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    // 1번 : 처음 부딛힐때
-    private void OnCollisionEnter(Collision collision)
+    // 1번 : 처음 부딪힐때
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //몬스터한테 닿으면
-        if (collision.collider.CompareTag("Monster"))
-        {
-            Debug.Log("몬스터한테 죽음");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        //if (collision.collider.CompareTag("Monster"))
+        //{
+        Debug.Log("몬스터한테 죽음");
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //}
 
     }
 }

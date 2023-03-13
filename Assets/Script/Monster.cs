@@ -53,13 +53,13 @@ public class Monster : MonoBehaviour
     }
 
     // 1번 : 처음 부딛힐때
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //몬스터한테 닿으면
-        if (collision.collider.CompareTag("태그"))
-        {
+        //if (collision.collider.CompareTag("태그"))
+        //{
                         
-        }
+        //}
 
     }
 
