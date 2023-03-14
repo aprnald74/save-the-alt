@@ -21,12 +21,14 @@ public class Line_Maker : MonoBehaviour
 
     //player
     Rigidbody2D playerRIgidbody;
-
     private float gravityScale;
+
+    //오브젝트 있는 확인용 변수
+    private bool objectFind;
 
     private void Start()
     {
-
+        objectFind = true;
         cnt = 0;
 
         //자신의 중력값과 자신의 값을 받는다
@@ -46,10 +48,26 @@ public class Line_Maker : MonoBehaviour
     void Update()
     {
 
+        //주변 0.53f거리 안에 있는 오브젝트를 collires안에 넣는다
+        Collider2D[] collidres = Physics2D.OverlapCircleAll(transform.position, 1f);
 
+        if (collidres.Length > 0)
+        {
+            Debug.Log("그릴수 없음");
+            objectFind = false;
+        }
+        else
+        {
+            Debug.Log("그릴수 있음");
+            objectFind = true;
+        }
 
         //라인을 그리기 위한 코드
-        if(Input.GetMouseButtonDown(0) && cnt == 0)
+
+        // if문 조건문
+        //  한번만 그릴수 있게 (없으면 계속 그릴수 있음)
+        //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
+        if (Input.GetMouseButtonDown(0) && cnt == 0)
         {
             GameObject go = Instantiate(linePrefab);
 
@@ -62,12 +80,18 @@ public class Line_Maker : MonoBehaviour
             Ir.positionCount = 1;
             Ir.SetPosition(0, points[0]);
 
-        }else if (Input.GetMouseButton(0) && cnt == 0)
+
+
+        }
+        // if문 조건문
+        //  한번만 그릴수 있게 (없으면 계속 그릴수 있음)
+        //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
+        else if (Input.GetMouseButton(0) && cnt == 0 )
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            //밑에 있는 if문 없으면 자신의 위치에 이미 줄이 있는데 계속해서 같은 위치에 소환됨
-            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f && cnt == 0)
+            //밑에 있는 if문 방금 마우스 위치 확임 (없으면 같은 위치에 계속 그릴수 있음
+            if (Vector2.Distance(points[points.Count - 1], pos) > 0.1f)
             {
                 points.Add(pos);
                 Ir.positionCount++;

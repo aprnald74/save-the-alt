@@ -29,11 +29,11 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //몬스터한테 닿으면
-        //if (collision.collider.CompareTag("Monster"))
-        //{
+        if (collision.collider.CompareTag("Monster"))
+        {
         Debug.Log("몬스터한테 죽음");
         //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //}
+        }
 
     }
 }

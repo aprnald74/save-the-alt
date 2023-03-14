@@ -31,13 +31,8 @@ public class Monster : MonoBehaviour
     {
 
         // 메인카메라에 있는 Line_Maker라는 스크립트에 있는 cnt가 1이랑 살아 있으면 움직임
-        if (GameObject.Find("Main Camera").GetComponent<Line_Maker>().cnt == 1 && isLive == true)
+        if (GameObject.Find("Main Camera").GetComponent<Line_Maker>().cnt == 1 && isLive)
         {
-
-            //for(int i = 0; i < 10; i++)
-            //{
-            //    transform.Translate(Vector3.forward * speed);
-            //}
 
             // 타겟에 위치값 알아옴
             Vector3 dir = target.position - transform.position;
@@ -55,12 +50,10 @@ public class Monster : MonoBehaviour
     // 1번 : 처음 부딛힐때
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //몬스터한테 닿으면
         //if (collision.collider.CompareTag("태그"))
         //{
                         
         //}
-
     }
 
 }
