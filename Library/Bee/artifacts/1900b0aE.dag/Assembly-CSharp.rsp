@@ -352,6 +352,7 @@
 "Assets/Script/Line_Maker.cs"
 "Assets/Script/Monster.cs"
 "Assets/Script/Player.cs"
+"Assets/Script/Test.cs"
 -langversion:9.0
 
 /deterministic

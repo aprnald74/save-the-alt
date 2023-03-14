@@ -46,6 +46,8 @@ public class Line_Maker : MonoBehaviour
     void Update()
     {
 
+
+
         //라인을 그리기 위한 코드
         if(Input.GetMouseButtonDown(0) && cnt == 0)
         {
