@@ -49,7 +49,7 @@ public class Line_Maker : MonoBehaviour
     {
 
         //주변 0.53f거리 안에 있는 오브젝트를 collires안에 넣는다
-        Collider2D[] collidres = Physics2D.OverlapCircleAll(transform.position, 1f);
+        Collider2D[] collidres = Physics2D.OverlapCircleAll(transform.position, 0.5f);
 
         if (collidres.Length > 0)
         {
@@ -67,7 +67,7 @@ public class Line_Maker : MonoBehaviour
         // if문 조건문
         //  한번만 그릴수 있게 (없으면 계속 그릴수 있음)
         //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
-        if (Input.GetMouseButtonDown(0) && cnt == 0)
+        if (Input.GetMouseButtonDown(0) && cnt == 0 && objectFind)
         {
             GameObject go = Instantiate(linePrefab);
 
@@ -86,7 +86,7 @@ public class Line_Maker : MonoBehaviour
         // if문 조건문
         //  한번만 그릴수 있게 (없으면 계속 그릴수 있음)
         //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
-        else if (Input.GetMouseButton(0) && cnt == 0 )
+        else if (Input.GetMouseButton(0) && cnt == 0 && objectFind)
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
