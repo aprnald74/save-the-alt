@@ -69,6 +69,8 @@ public class Line_Maker : MonoBehaviour
         //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
         if (Input.GetMouseButtonDown(0) && cnt == 0 && objectFind)
         {
+
+            Debug.Log("1");
             GameObject go = Instantiate(linePrefab);
 
             //라인 복제한거 lines리스트에 넣기
@@ -88,6 +90,8 @@ public class Line_Maker : MonoBehaviour
         //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
         else if (Input.GetMouseButton(0) && cnt == 0 && objectFind)
         {
+
+            Debug.Log("2");
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             //밑에 있는 if문 방금 마우스 위치 확임 (없으면 같은 위치에 계속 그릴수 있음
@@ -114,7 +118,7 @@ public class Line_Maker : MonoBehaviour
             //lines 리스트에 있는 중력 값을 0에서 1로 바꿈
             foreach (Rigidbody2D line in lines)
             {
-                line.gravityScale = 1;
+                line.gravityScale = 0.2f;
             }
         }
 

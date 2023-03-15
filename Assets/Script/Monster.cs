@@ -41,8 +41,8 @@ public class Monster : MonoBehaviour
             transform.position += dir * speed * Time.deltaTime;
 
             // 타겟 방향으로 회전함
-            angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            //angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         }
     }
