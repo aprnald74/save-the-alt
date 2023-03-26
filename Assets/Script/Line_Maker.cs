@@ -24,10 +24,12 @@ public class Line_Maker : MonoBehaviour
     private float gravityScale;
 
     //오브젝트 있는 확인용 변수
-    private bool objectFind;
+    public bool objectFind;
+
 
     private void Start()
     {
+
         objectFind = true;
         cnt = 0;
 
@@ -48,20 +50,6 @@ public class Line_Maker : MonoBehaviour
     void Update()
     {
 
-        //주변 0.53f거리 안에 있는 오브젝트를 collires안에 넣는다
-        Collider2D[] collidres = Physics2D.OverlapCircleAll(transform.position, 0.5f);
-
-        if (collidres.Length > 0)
-        {
-            Debug.Log("그릴수 없음");
-            objectFind = false;
-        }
-        else
-        {
-            Debug.Log("그릴수 있음");
-            objectFind = true;
-        }
-
         //라인을 그리기 위한 코드
 
         // if문 조건문
@@ -70,7 +58,7 @@ public class Line_Maker : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && cnt == 0 && objectFind)
         {
 
-            Debug.Log("1");
+            //Debug.Log("1");
             GameObject go = Instantiate(linePrefab);
 
             //라인 복제한거 lines리스트에 넣기
@@ -91,7 +79,7 @@ public class Line_Maker : MonoBehaviour
         else if (Input.GetMouseButton(0) && cnt == 0 && objectFind)
         {
 
-            Debug.Log("2");
+            //Debug.Log("2");
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             //밑에 있는 if문 방금 마우스 위치 확임 (없으면 같은 위치에 계속 그릴수 있음

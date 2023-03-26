@@ -31,7 +31,7 @@ public class Monster : MonoBehaviour
     {
 
         // 메인카메라에 있는 Line_Maker라는 스크립트에 있는 cnt가 1이랑 살아 있으면 움직임
-        if (GameObject.Find("Main Camera").GetComponent<Line_Maker>().cnt == 1 && isLive)
+        if (GameObject.Find("MainCamera").GetComponent<Line_Maker>().cnt == 1 && isLive)
         {
 
             // 타겟에 위치값 알아옴
@@ -41,8 +41,8 @@ public class Monster : MonoBehaviour
             transform.position += dir * speed * Time.deltaTime;
 
             // 타겟 방향으로 회전함
-            //angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         }
     }
