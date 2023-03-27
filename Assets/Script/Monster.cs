@@ -50,10 +50,10 @@ public class Monster : MonoBehaviour
     // 1번 : 처음 부딛힐때
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if (collision.collider.CompareTag("태그"))
-        //{
-                        
-        //}
+        if (collision.collider.CompareTag("Spike"))
+        {
+            Debug.Log("가시에 박혀 뒤짐");
+        }
     }
 
 }

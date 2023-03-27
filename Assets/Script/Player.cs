@@ -31,9 +31,11 @@ public class Player : MonoBehaviour
         //몬스터한테 닿으면
         if (collision.collider.CompareTag("Monster"))
         {
-        Debug.Log("몬스터한테 죽음");
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("몬스터한테 죽음");
         }
-
+        if (collision.collider.CompareTag("Spike"))
+        {
+            Debug.Log("가시에 박혀 뒤짐");
+        }
     }
 }

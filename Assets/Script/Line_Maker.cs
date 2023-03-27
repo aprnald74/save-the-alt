@@ -9,9 +9,6 @@ public class Line_Maker : MonoBehaviour
     public GameObject Player;
     public GameObject linePrefab;
 
-    //cnt는 그릴 수 있는 횟수 0이면 그릴수 있고, 1이면 못그림
-    public int cnt;
-
     //라인
     LineRenderer Ir;
     EdgeCollider2D col;
@@ -23,13 +20,20 @@ public class Line_Maker : MonoBehaviour
     Rigidbody2D playerRIgidbody;
     private float gravityScale;
 
-    //오브젝트 있는 확인용 변수
+    //cnt는 그릴 수 있는 확인용(횟수 1번만)
+    public int cnt;
+
+    //라인 주변에 오브젝트에 있는지 확인용
     public bool objectFind;
+
+    //오브젝트 
+    public bool mousePoint;
 
 
     private void Start()
     {
 
+        
         objectFind = true;
         cnt = 0;
 
@@ -55,7 +59,7 @@ public class Line_Maker : MonoBehaviour
         // if문 조건문
         //  한번만 그릴수 있게 (없으면 계속 그릴수 있음)
         //  주면에 오브젝트 없는지 (없으면 아무때나 그리다가 오브젝트 끼리 끼임)
-        if (Input.GetMouseButtonDown(0) && cnt == 0 && objectFind)
+        if (Input.GetMouseButtonDown(0) && cnt == 0)
         {
 
             //Debug.Log("1");
@@ -91,7 +95,8 @@ public class Line_Maker : MonoBehaviour
                 col.points = points.ToArray();
             }
 
-        }else if (Input.GetMouseButtonUp(0))
+        }
+        else if (Input.GetMouseButtonUp(0))
         {
 
             //마우스를 떼면 그리고 있던 마지막 포인트를 지운다
@@ -101,7 +106,7 @@ public class Line_Maker : MonoBehaviour
             playerRIgidbody.gravityScale = gravityScale;
 
 
-            cnt++;
+            cnt = 1;
 
             //lines 리스트에 있는 중력 값을 0에서 1로 바꿈
             foreach (Rigidbody2D line in lines)
@@ -110,7 +115,7 @@ public class Line_Maker : MonoBehaviour
             }
         }
 
-    //if(GameObject.Find("스크립트를 포함하는 오브젝트이름").GetComponent<스크립트 이름>().변수 == true)
+        //if(GameObject.Find("스크립트를 포함하는 오브젝트이름").GetComponent<스크립트 이름>().변수 == true)
     }
 }
 

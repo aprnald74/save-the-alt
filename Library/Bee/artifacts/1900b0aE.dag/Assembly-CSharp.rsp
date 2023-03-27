@@ -352,6 +352,7 @@
 "Assets/Script/Line.cs"
 "Assets/Script/Line_Maker.cs"
 "Assets/Script/Monster.cs"
+"Assets/Script/Object.cs"
 "Assets/Script/Player.cs"
 -langversion:9.0
 

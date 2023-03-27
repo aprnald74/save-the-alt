@@ -16,15 +16,17 @@ public class Line : MonoBehaviour
     {
         
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnMouseEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Player" || collision.gameObject.tag == "Monster")
         {
-            Debug.Log("This is plane");
             GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
         }
-    }
+        else
+        {
+            GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
+        }
 
+    }
     //if(GameObject.Find("스크립트를 포함하는 오브젝트이름").GetComponent<스크립트 이름>().변수 == true)
 }
