@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static System.Math;
 
 public class LineFind : MonoBehaviour
 {
@@ -9,17 +12,36 @@ public class LineFind : MonoBehaviour
     private float dy;
     private float rotateDegree;
 
+    private float mx;
+    private float mz;
+
+    private float lx;
+    private float lz;
+
+    private float distance;
+
     void Start()
     {
-        transform.localScale = new Vector2(1, 1);
+        transform.localScale = new Vector2(0, 0);
         transform.position = new Vector2(0, 0);
     }
 
     void Update()
     {
-
+        
         Vector3 mPosition = Input.mousePosition; // 마우스 좌표 저장
         Vector3 oPosition = transform.position; // 게임 오브젝트 좌표 저장
+
+        lx = oPosition.x;
+        lz = oPosition.z;
+
+        mx = mPosition.x;
+        mz = mPosition.z;
+
+        distance = (float)Math.Sqrt(Math.Pow(lx - mx, 2) + Math.Pow(lz - mz, 2))/300;
+
+        transform.localScale = new Vector2(distance, 1);
+
 
         // 카메라가 앞면에서 뒤로 보고 있기 때문에, 마우스 position의 z축 정보에 
         // 게임 오브젝트와 카메라와의 z축의 차이를 입력시켜줘야 합니다.
