@@ -57,10 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Monster.cs" />
+    <Compile Include="Assets\Script\LineFind.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\Object.cs" />
     <Compile Include="Assets\Script\Line_Maker.cs" />
-    <Compile Include="Assets\Script\LineFind.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

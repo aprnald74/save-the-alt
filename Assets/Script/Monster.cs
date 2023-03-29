@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
     // 몬스터 살아있는지 여부 true면 살아 있는거
     private bool isLive;
 
+    // 몬스터 회전
     private float angle;
 
     void Start()

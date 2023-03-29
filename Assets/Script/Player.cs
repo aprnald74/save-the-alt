@@ -8,11 +8,10 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
-    // Update is called once per frame
     void Update()
     {
 
-        //자신의 위치값을 계속 받는다
+        // 자신의 위치값을 계속 받는다
         Vector2 currentPosition = transform.position;
 
         //오브젝트의 Y의 값이 -5이상 떨어지만 실행
@@ -38,4 +37,6 @@ public class Player : MonoBehaviour
             Debug.Log("가시에 박혀 뒤짐");
         }
     }
+
+    //if(GameObject.Find("스크립트를 포함하는 오브젝트이름").GetComponent<스크립트 이름>().변수 == true)
 }
