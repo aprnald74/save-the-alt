@@ -7,13 +7,17 @@ using UnityEngine;
 // 벗어나면 다시 그릴수 있게 true로 바꿈
 public class Object : MonoBehaviour
 {
+
+    public GameObject LineFinder;
     void OnMouseEnter()
     {
+        LineFinder.SetActive(true); 
         GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
     }
 
     void OnMouseExit()
     {
+        LineFinder.SetActive(false);
         GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
     }
 }
