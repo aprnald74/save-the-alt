@@ -7,15 +7,9 @@ using UnityEngine;
 public class LineFind : MonoBehaviour
 {
 
-    private float dx;
-    private float dy;
+    public bool mouse;
+    
     private float rotateDegree;
-
-    private float mx;
-    private float mz;
-
-    private float lx;
-    private float lz;
 
     private float distance;
 
@@ -43,7 +37,6 @@ public class LineFind : MonoBehaviour
 
         // 구해진 각도를 z축을 기준으로 게임 오브젝트를 회전시킵니다.
         transform.rotation = Quaternion.AngleAxis(rotateDegree, Vector3.forward);
-
     }
 }
 
