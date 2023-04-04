@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class LineFind : MonoBehaviour
 {
-
-    public bool mouse;
     
     private float rotateDegree;
 
@@ -15,13 +13,12 @@ public class LineFind : MonoBehaviour
 
     void Start()
     {
-        //transform.localScale = new Vector2(0, 0);
-        //transform.position = new Vector2(0, 0);
+
     }
 
     void Update()
     {
-        
+
         Vector3 mPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 좌표 저장
         Vector3 oPosition = transform.position; // 게임 오브젝트 좌표 저장
         

@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Wall
   - Spike
+  - Ground
   layers:
   - Default
   - TransparentFX
