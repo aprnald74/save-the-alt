@@ -10,17 +10,23 @@ public class Object : MonoBehaviour
 
     public GameObject ObjectFind;
 
-    void OnMouseEnter()
+    void OnMouseEnter() // 마우스가 오브젝트 위에 올라가면
     {
-        ObjectFind.gameObject.SetActive(true);
-        Debug.Log("true");
-        GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
+        if (Input.GetMouseButton(0))
+        {
+            //ObjectFind.gameObject.SetActive(true);
+            Debug.Log("true");
+            GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
+        }
     }
 
-    void OnMouseExit()
+    void OnMouseExit() // 마우스가 오브젝트를 나가면
     {
-        ObjectFind.gameObject.SetActive(false);
-        Debug.Log("false");
-        GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
+        if (Input.GetMouseButton(0))
+        {
+            //ObjectFind.gameObject.SetActive(false);
+            Debug.Log("false");
+            GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
+        }
     }
 }

@@ -14,7 +14,7 @@ public class Monster : MonoBehaviour
     public Transform target;
 
     // 몬스터 움직이는 속도
-    private float speed;
+    public float speed;
 
     // 몬스터 살아있는지 여부 true면 살아 있는거
     private bool isLive;
@@ -25,7 +25,6 @@ public class Monster : MonoBehaviour
     void Start()
     {
         isLive = true;
-        speed = 1;
     }
 
     void Update()

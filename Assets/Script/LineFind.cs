@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class LineFind : MonoBehaviour
 {
+
     
     private float rotateDegree;
 
@@ -13,11 +14,12 @@ public class LineFind : MonoBehaviour
 
     void Start()
     {
-
+        //col.isTrigger = false;
     }
 
     void Update()
     {
+
 
         Vector3 mPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // 마우스 좌표 저장
         Vector3 oPosition = transform.position; // 게임 오브젝트 좌표 저장
@@ -34,6 +36,18 @@ public class LineFind : MonoBehaviour
 
         // 구해진 각도를 z축을 기준으로 게임 오브젝트를 회전시킵니다.
         transform.rotation = Quaternion.AngleAxis(rotateDegree, Vector3.forward);
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag == "Ground")
+        {
+            Debug.Log("충돌");
+        }
+        else
+        {
+            Debug.Log("충돌X");
+        }
     }
 }
 
