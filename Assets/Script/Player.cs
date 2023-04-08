@@ -27,11 +27,12 @@ public class Player : MonoBehaviour
     // 1번 : 처음 부딪힐때
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //몬스터한테 닿으면
+        // 닿은 오브젝트 태그가 Monster이면
         if (collision.collider.CompareTag("Monster"))
         {
             Debug.Log("몬스터한테 죽음");
         }
+        // 닿은 오브젝트 태그가 Spike이면
         if (collision.collider.CompareTag("Spike"))
         {
             Debug.Log("가시에 박혀 뒤짐");

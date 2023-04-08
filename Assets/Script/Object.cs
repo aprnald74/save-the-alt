@@ -8,10 +8,11 @@ using UnityEngine;
 public class Object : MonoBehaviour
 {
 
-    public GameObject ObjectFind;
+    //public GameObject ObjectFind;
 
     void OnMouseEnter() // 마우스가 오브젝트 위에 올라가면
     {
+        //마우스를 클릭하고 있으면
         if (Input.GetMouseButton(0))
         {
             //ObjectFind.gameObject.SetActive(true);
@@ -22,6 +23,7 @@ public class Object : MonoBehaviour
 
     void OnMouseExit() // 마우스가 오브젝트를 나가면
     {
+        //마우스를 클릭하고 있으면
         if (Input.GetMouseButton(0))
         {
             //ObjectFind.gameObject.SetActive(false);
