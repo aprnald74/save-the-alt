@@ -7,26 +7,17 @@ using UnityEngine;
 // 벗어나면 다시 그릴수 있게 true로 바꿈
 public class Object : MonoBehaviour
 {
-
-    //public GameObject ObjectFind;
-
-    void OnMouseEnter() // 마우스가 오브젝트 위에 올라가면
-    {
-        //마우스를 클릭하고 있으면
-        if (Input.GetMouseButton(0))
-        {
-            //ObjectFind.gameObject.SetActive(true);
+    // 마우스가 오브젝트에 접촉하고, 마우스를 클릭하면
+    void OnMouseEnter() {
+        if (Input.GetMouseButton(0)) {
             Debug.Log("true");
             GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
         }
     }
 
-    void OnMouseExit() // 마우스가 오브젝트를 나가면
-    {
-        //마우스를 클릭하고 있으면
-        if (Input.GetMouseButton(0))
-        {
-            //ObjectFind.gameObject.SetActive(false);
+    // 마우스가 오브젝트를 나가고, 마우스를 클릭하면
+    void OnMouseExit() {
+        if (Input.GetMouseButton(0)) {
             Debug.Log("false");
             GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
         }

@@ -42,26 +42,42 @@ public class LineFind : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(rotateDegree, Vector3.forward);
     }
 
-    //오브젝트가 collider에 닿으면 1번만 실행
-    void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerExit2D(Collider2D col)
     {
-        // 닿은 오브젝트 태그가 Ground나 Player나 Monster나 Spike이면
-        if(col.gameObject.tag == "Ground" | 
-           col.gameObject.tag == "Player" | 
-           col.gameObject.tag == "Monster" | 
-           col.gameObject.tag == "Spike")
-        {
-            //마우스 위치값에 오브젝트 이동
-            transform.position = new Vector2(mPosition.x, mPosition.y);
-            //Debug.Log("충돌");
-        }
-        else
-        {
-            //조건문에 없는 태그에 닿으면 0,0으로 이동
-            transform.position = new Vector2(0, 0);
-            //Debug.Log("충돌X");
-        }
+        Destroy(gameObject);
     }
+
+    ////오브젝트가 collider에 닿으면
+    //void OnTriggerEnter2D(Collider2D col)
+    //{
+    //    // 닿은 오브젝트 태그가 Ground나 Player나 Monster나 Spike이면
+    //    if (col.gameObject.tag == "Ground" |
+    //       col.gameObject.tag == "Player" |
+    //       col.gameObject.tag == "Monster" |
+    //       col.gameObject.tag == "Spike")
+    //    {
+    //        Debug.Log("추돌");
+    //        //마우스 위치값에 오브젝트 이동
+    //        transform.position = new Vector2(mPosition.x, mPosition.y);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("충돌안함");
+    //        //조건문에 없는 태그에 닿으면 0,0으로 이동
+    //        transform.position = new Vector2(0, 0);
+    //    }
+    //}
+
+    //private void OnTriggerStay2D(Collider2D col)
+    //{
+    //    if (col.gameObject.tag == "Ground" |
+    //       col.gameObject.tag == "Player" |
+    //       col.gameObject.tag == "Monster" |
+    //       col.gameObject.tag == "Spike")
+    //    {
+    //        Debug.Log("충돌중");
+    //    }
+    //}
 }
 
 // gameObject.SetActive(false);
