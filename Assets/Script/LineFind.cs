@@ -15,35 +15,38 @@ public class LineFind : MonoBehaviour
     //오브젝트, 마우스 거리 구하기 위한 변수
     private float distance;
 
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
+    // 마우스 좌표까지 오브젝트 늘리고, 마우스 바라보게 하는 코드
+    void Update() {
 
-        // 마우스 좌표 저장
         mPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // 게임 오브젝트 좌표 저장
-        Vector3 oPosition = transform.position; 
-        
-        // 두 점 거리 구하는 공식 이용해서 오브젝트 늘리고 줄임
+        Vector3 oPosition = transform.position;
+        Vector3 target = mPosition - transform.position;
+
         distance = (float)Mathf.Sqrt(Mathf.Pow(oPosition.x - mPosition.x, 2) + Mathf.Pow(oPosition.y - mPosition.y, 2));
         transform.localScale = new Vector2(distance, 1);
 
-        // 마우스의 좌표에서 오브젝트 위치를 뺀것을 target에 저장
-        Vector3 target = mPosition - transform.position;
-
-        // 얼만큼 회전할지 구함
         rotateDegree = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
 
-        // 구해진 각도를 z축을 기준으로 게임 오브젝트를 회전시킵니다.
         transform.rotation = Quaternion.AngleAxis(rotateDegree, Vector3.forward);
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    // Ground, Player, Monster, Spike에 닿이고 있으면 objectFind false로 바꿈
+    void OnTriggerStay2D(Collider2D col)
     {
+        if (col.gameObject.tag == "Ground" ||
+            col.gameObject.tag == "Player" ||
+            col.gameObject.tag == "Monster"||
+            col.gameObject.tag == "Spike") 
+        {
+            Debug.Log("충돌중");
+            GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
+        }
+    }
+
+    // 트리거에서 벗어나면 objectFind true로 바꾸고, 이 오브젝트 삭제함
+    void OnTriggerExit2D(Collider2D col) {
+        GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
         Destroy(gameObject);
     }
 
@@ -65,17 +68,6 @@ public class LineFind : MonoBehaviour
     //        Debug.Log("충돌안함");
     //        //조건문에 없는 태그에 닿으면 0,0으로 이동
     //        transform.position = new Vector2(0, 0);
-    //    }
-    //}
-
-    //private void OnTriggerStay2D(Collider2D col)
-    //{
-    //    if (col.gameObject.tag == "Ground" |
-    //       col.gameObject.tag == "Player" |
-    //       col.gameObject.tag == "Monster" |
-    //       col.gameObject.tag == "Spike")
-    //    {
-    //        Debug.Log("충돌중");
     //    }
     //}
 }

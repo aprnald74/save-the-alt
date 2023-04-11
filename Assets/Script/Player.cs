@@ -5,36 +5,23 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour 
 {
-
-    void Update()
-    {
-
-        // 자신의 위치값을 계속 받는다
+    // 자신의 위치값을 받다가
+    // y값이 -5이하로 떨어지면 0, 4로 이동
+    void Update() {
         Vector2 currentPosition = transform.position;
-
-        //오브젝트의 Y의 값이 -5이상 떨어지만 실행
-        if (currentPosition.y <= -5)
-        {
-            // 오브젝트를 (0,4) 좌표로 이동시킴
+        if (currentPosition.y <= -5) {
             transform.position = new Vector2(0, 4);
-
-            
         }
     }
 
-    // 1번 : 처음 부딪힐때
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // 닿은 오브젝트 태그가 Monster이면
-        if (collision.collider.CompareTag("Monster"))
-        {
+    // 닿은 오브젝트가 Monster이거나 Spike면 죽은걸 알려줌
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.CompareTag("Monster")) {
             Debug.Log("몬스터한테 죽음");
         }
-        // 닿은 오브젝트 태그가 Spike이면
-        if (collision.collider.CompareTag("Spike"))
-        {
+        if (collision.collider.CompareTag("Spike")) {
             Debug.Log("가시에 박혀 뒤짐");
         }
     }

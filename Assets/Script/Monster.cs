@@ -16,23 +16,12 @@ public class Monster : MonoBehaviour
     // 몬스터 움직이는 속도
     public float speed;
 
-    // 몬스터 살아있는지 여부 true면 살아 있는거
-    private bool isLive;
-
     // 몬스터 회전
     private float angle;
 
-    void Start()
-    {
-        isLive = true;
-    }
-
-    void Update()
-    {
-
+    void Update() {
         // 메인카메라에 있는 Line_Maker라는 스크립트에 있는 cnt가 1이랑 살아 있으면 움직임
-        if (GameObject.Find("MainCamera").GetComponent<Line_Maker>().cnt == 1 && isLive)
-        {
+        if (GameObject.Find("MainCamera").GetComponent<Line_Maker>().cnt == 1) {
 
             // 타겟에 위치값 알아옴
             Vector3 dir = target.position - transform.position;
@@ -48,10 +37,8 @@ public class Monster : MonoBehaviour
     }
 
     // 1번 : 처음 부딛힐때
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Spike"))
-        {
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.CompareTag("Spike")) {
             Debug.Log("가시에 박혀 뒤짐");
         }
     }

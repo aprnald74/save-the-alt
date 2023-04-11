@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 692190224643615245}
   - component: {fileID: 692190224643615244}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: Line_Finder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
