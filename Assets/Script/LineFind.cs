@@ -31,23 +31,11 @@ public class LineFind : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(rotateDegree, Vector3.forward);
     }
 
-    // Ground, Player, Monster, Spike에 닿이고 있으면 objectFind false로 바꿈
-    void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Ground" ||
-            col.gameObject.tag == "Player" ||
-            col.gameObject.tag == "Monster"||
-            col.gameObject.tag == "Spike") 
-        {
-            Debug.Log("충돌중");
-            GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
-        }
-    }
-
     // 트리거에서 벗어나면 objectFind true로 바꾸고, 이 오브젝트 삭제함
     void OnTriggerExit2D(Collider2D col) {
         GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
         Destroy(gameObject);
+        GameObject.Find("Mouse").GetComponent<Mouse>().isna = true;
     }
 
     ////오브젝트가 collider에 닿으면

@@ -10,6 +10,13 @@ public class Mouse : MonoBehaviour
     // Mouse 위치값 저장하기 위해 있는 변수
     Vector3 mPosition;
 
+    public bool isna;
+
+    void Start()
+    {
+        isna = true;
+    }
+
     // 마우스 위치에 오브젝트 계속 이동
     void Update() {
         mPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -22,10 +29,12 @@ public class Mouse : MonoBehaviour
         if (col.gameObject.tag == "Ground" ||
             col.gameObject.tag == "Player" ||
             col.gameObject.tag == "Monster"||
-            col.gameObject.tag == "Spike") 
+            col.gameObject.tag == "Spike"  && isna) 
         {
             Debug.Log("충돌");
             Instantiate(LineFInder, transform.position, transform.rotation);
+            GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
+            isna = false;
         }
     }
 
