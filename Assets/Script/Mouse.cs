@@ -12,9 +12,12 @@ public class Mouse : MonoBehaviour
 
     public bool isna;
 
+    CircleCollider2D circleCollider;
+
     void Start()
     {
         isna = true;
+        circleCollider = GetComponent <CircleCollider2D>();
     }
 
     // 마우스 위치에 오브젝트 계속 이동
@@ -32,10 +35,13 @@ public class Mouse : MonoBehaviour
             col.gameObject.tag == "Spike"  && isna) 
         {
             Debug.Log("충돌");
-            Instantiate(LineFInder, transform.position, transform.rotation);
             GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
+            circleCollider.enabled = false; //컴포넌트 비활성화
             isna = false;
+
+
+            Instantiate(LineFInder, transform.position, transform.rotation);
         }
     }
-
+    
 }

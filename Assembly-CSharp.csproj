@@ -62,6 +62,7 @@
     <Compile Include="Assets\Script\Object.cs" />
     <Compile Include="Assets\Script\Line_Maker.cs" />
     <Compile Include="Assets\Script\Mouse.cs" />
+    <Compile Include="Assets\Script\MainCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
