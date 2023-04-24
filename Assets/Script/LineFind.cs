@@ -15,8 +15,7 @@ public class LineFind : MonoBehaviour
     //오브젝트, 마우스 거리 구하기 위한 변수
     private float distance;
 
-    public GameObject mouse;
-
+    public CircleCollider2D mouse;
 
     // 마우스 좌표까지 오브젝트 늘리고, 마우스 바라보게 하는 코드
     void Update() {
@@ -37,6 +36,7 @@ public class LineFind : MonoBehaviour
     void OnTriggerExit2D(Collider2D col) {
         GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
         GameObject.Find("Mouse").GetComponent<Mouse>().isna = true;
+        mouse.enabled = true;
         Destroy(gameObject);
     }
 }

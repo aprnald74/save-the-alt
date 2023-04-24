@@ -18,6 +18,7 @@ public class Mouse : MonoBehaviour
     {
         isna = true;
         circleCollider = GetComponent <CircleCollider2D>();
+        circleCollider.enabled = true; //컴포넌트 활성화
     }
 
     // 마우스 위치에 오브젝트 계속 이동
