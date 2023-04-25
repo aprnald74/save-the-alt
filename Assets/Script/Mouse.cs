@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Mouse : MonoBehaviour
@@ -25,6 +26,7 @@ public class Mouse : MonoBehaviour
     void Update() {
         mPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector2(mPosition.x, mPosition.y);
+        
     }
 
     // 닿은 오브젝트 태그가 Ground나 Player나 Monster나 Spike이면
@@ -37,7 +39,7 @@ public class Mouse : MonoBehaviour
         {
             Debug.Log("충돌");
             GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
-            circleCollider.enabled = false; //컴포넌트 비활성화
+            circleCollider.enabled = true; //컴포넌트 비활성화
             isna = false;
 
 
