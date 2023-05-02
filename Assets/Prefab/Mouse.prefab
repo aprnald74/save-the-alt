@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9161470857538159452}
   - component: {fileID: 9161470857538159455}
   - component: {fileID: 9161470857538158754}
-  - component: {fileID: 9161470857538159453}
   m_Layer: 6
   m_Name: Mouse
   m_TagString: Untagged
@@ -71,17 +70,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9161470857538159453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9161470857538159454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f682be5d2d7184796a4a76651764c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LineFInder: {fileID: 692190224643615241, guid: e860e78eaad51984a94da8dc1c905bf9, type: 3}
-  isna: 0

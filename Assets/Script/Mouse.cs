@@ -6,7 +6,7 @@ using UnityEngine;
 public class Mouse : MonoBehaviour
 {
     // Line_Finder 오브젝트를 복제를 위해
-    public GameObject LineFInder;
+    public GameObject LineFinder;
 
     // Mouse 위치값 저장하기 위해 있는 변수
     Vector3 mPosition;
@@ -39,11 +39,11 @@ public class Mouse : MonoBehaviour
         {
             Debug.Log("충돌");
             GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = false;
-            circleCollider.enabled = true; //컴포넌트 비활성화
+            circleCollider.enabled = false; //컴포넌트 비활성화
             isna = false;
 
 
-            Instantiate(LineFInder, transform.position, transform.rotation);
+            Instantiate(LineFinder, transform.position, transform.rotation);
         }
     }
     
