@@ -6,19 +6,18 @@ using UnityEngine;
 
 public class LineFind : MonoBehaviour
 {
-    //마우스 좌펴를 저장하기 위한 변수
+    // 마우스 좌표를 저장하기 위한 변수
     Vector3 mPosition;
     
-    //오브젝트 회전
-    private float rotateDegree;
+    // 오브젝트 회전을 위한 변수
+    float rotateDegree;
 
-    //오브젝트, 마우스 거리 구하기 위한 변수
-    private float distance;
+    // 오브젝트, 마우스 거리 구하기 위한 변수
+    float distance;
 
-    public CircleCollider2D mouse;
-
-    // 마우스 좌표까지 오브젝트 늘리고, 마우스 바라보게 하는 코드
-    void Update() {
+    // 수학 공식을 활용하여 LineFinde오브젝트가 마우스 위치에 따라 다니면서 움직이게 함
+    void Update() 
+    {
 
         mPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 oPosition = transform.position;
@@ -30,16 +29,15 @@ public class LineFind : MonoBehaviour
         rotateDegree = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.AngleAxis(rotateDegree, Vector3.forward);
+
     }
 
-    // 트리거에서 벗어나면 objectFind true로 바꾸고, 이 오브젝트 삭제함
-    void OnTriggerExit2D(Collider2D col) {
-        GameObject.Find("MainCamera").GetComponent<Line_Maker>().objectFind = true;
-        GameObject.Find("Mouse").GetComponent<Mouse>().isna = true;
-        mouse.enabled = true;
+    // 오브젝트랑 충돌에서 벗어나면 다시 그릴수 있게 만들고 Mouse collider를 활성화 시켜주고 이 오브젝트를 삭제한다
+    void OnTriggerExit2D(Collider2D col)
+    {
+        GameObject.Find("GameManager").GetComponent<LineMaker>().cheackTwo = true;
+        GameObject.Find("Mouse").GetComponent<Mouse>().CMP = true;
+
         Destroy(gameObject);
     }
 }
-
-// gameObject.SetActive(false);
-//if(GameObject.Find("스크립트를 포함하는 오브젝트이름").GetComponent<스크립트 이름>().변수 == true)
