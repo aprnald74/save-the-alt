@@ -1,89 +1,75 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
 public class LineMaker : MonoBehaviour
 {
     // cheackOne는 한번만 그릴수 있도록 하는것
-    [HideInInspector]
-    public bool cheackOne;
+    [HideInInspector] public bool cheackOne;
 
     // cheachTwo는 라인 주변에 오브젝트에 있는지 확인용
-    [HideInInspector]
-    public bool cheackTwo;
-    
+    [HideInInspector] public bool cheackTwo;
+
     // cheackThree는 그릴수 있는지 확인용
-    bool cheackThree;
+    private bool cheackThree;
 
 
     // 라인을 저장하기 위한 변수
-    GameObject linePrefab;
+    private GameObject linePrefab;
 
     // 라인
-    LineRenderer Ir;
-    EdgeCollider2D col;
-    List<Vector2> points = new List<Vector2>();
-    List<Rigidbody2D> lines = new List<Rigidbody2D>();
-    Rigidbody2D line;
+    private LineRenderer Ir;
+    private EdgeCollider2D col;
+    private List<Vector2> points = new List<Vector2>();
+    private List<Rigidbody2D> lines = new List<Rigidbody2D>();
+    private Rigidbody2D line;
 
     // player
-    Rigidbody2D[] plRb;
-    float gravityScale;
-    List<GameObject> players = new List<GameObject>();
+    private Rigidbody2D[] plRb;
+    private float gravityScale;
+    private List<GameObject> players = new List<GameObject>();
 
 
 
     // 게이지를 관리하기 위한 변수
-    Slider dGauge;
+    private Slider dGauge;
 
     // 게이지에 현재값을 위한 변수
-    float current;
+    private float current;
 
     // 게이지 그 자체를 저장하기 위한 변수
-    GameObject fill;
-
+    private GameObject fill;
 
 
     // 현제 몇 라운드인지 확인하기 위한 변수
-    [HideInInspector]
-    public int stage;
+    private int nStage;
 
     // 라운드마다 최대로 그릴수 있는 횟수를 저장하기 위한 변수
-    List<float> max = new List<float>();
+    private List<float> max = new List<float>();
 
 
 
     // InGame에 있는 별을 저장하기 위한 변수
-    List<SpriteRenderer> thisImg = new List<SpriteRenderer>();
+    private List<SpriteRenderer> thisImg = new List<SpriteRenderer>();
 
     // InGame에 있는 별이 바뀔 이미지를 저장하기 위한 변수
-    Sprite change_Icon;
+    private Sprite change_Icon;
 
     // thisImg의 별마다 사라질 수를 저장하기 위한 변수
-    List<float> star = new List<float>();
-
-
+    private List<float> star = new List<float>();
 
     // List에 사용할 간단한 변수
-    int num = 2;
+    private int num = 2;
 
-    void Start() {
-
-        GameSetting();
-
-    }
-    void GameSetting()
+    void Awake()
     {
         // 게임 필드에 있는 플레이어를 모두 찾고
         // 모든 플레이어의 Rigidbody를 관리할수 있게 만들고
         // 모든 플레이어의 중력값과 떨어지는 값을 0으로 만듬
         players.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         plRb = new Rigidbody2D[players.Count];
-        for (int i = 0; i < players.Count; i++) {
+        for (int i = 0; i < players.Count; i++)
+        {
             plRb[i] = players[i].GetComponent<Rigidbody2D>();
             plRb[i].velocity = Vector2.zero;
             plRb[i].gravityScale = 0;
@@ -102,17 +88,7 @@ public class LineMaker : MonoBehaviour
         fill = GameObject.Find("Fill");
 
         // 요기서 라운드마다 그릴수 있는 최대를 정함
-        max.AddRange(new float[] {500, 800, 700});
-        
-        // 현재 스테이지에 최대로 그릴수 있는 수를 저장
-        current = max[stage - 1];
-
-        // 100이라면 Star[0]에 50 -> 100 -> 150
-        // 별의 오브젝트를 찾고 그 오브젝트의 스프라이트를 thisImg에 저장함
-        for (int i = 1; i < 4; i++) {
-            star.Add((max[stage - 1] / 4) * i);
-            thisImg.Add(GameObject.Find("Star" + (4 - i)).GetComponent<SpriteRenderer>());
-        }
+        max.AddRange(new float[] { 500, 800, 700 });
 
         // 바꿀 이미지 찾아옴
         change_Icon = Resources.Load<Sprite>("IMG/Yes");
@@ -120,13 +96,32 @@ public class LineMaker : MonoBehaviour
         cheackOne = true;
         cheackTwo = true;
         cheackThree = true;
+
+    }
+
+    void Start()
+    {
+
+        nStage = GameObject.Find("GameManager").GetComponent<Stage>().stage - 1;
+
+        // 현재 스테이지에 최대로 그릴수 있는 수를 저장
+        current = max[nStage];
+
+        // 100이라면 Star[0]에 50 -> 100 -> 150
+        // 별의 오브젝트를 찾고 그 오브젝트의 스프라이트를 thisImg에 저장함
+        for (int i = 1; i < 4; i++)
+        {
+            star.Add((max[nStage] / 4) * i);
+            thisImg.Add(GameObject.Find("Star" + (4 - i)).GetComponent<SpriteRenderer>());
+        }
+
     }
 
     // 라인을 그리기 위한 코드
     void Update() {
 
         // 게이지에 값을 조정해서 적용시킴
-        dGauge.value = current / max[stage - 1];
+        dGauge.value = current / max[nStage];
 
         // 게이지 값에따라 별의 이미지를 바꿈
         if (num != -1) 

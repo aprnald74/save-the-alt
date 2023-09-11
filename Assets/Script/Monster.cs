@@ -1,71 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.PlayerLoop;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using static UnityEngine.GraphicsBuffer;
 
 public class Monster : MonoBehaviour
 {
 
-    // 몬스터의 속도를 저장하기 위한 변수
-    float speed;
+    private List<GameObject> foundObject; // Player태그를 가진 오브젝트를 저장하기 위한 리스트
 
-    // 몬스터가 회전하기 위한 변수
-    float angle;
+    private ParticleSystem particle; // 오브젝트 터질때 생기는 파티클
 
-    Animator animator;
+    private SpriteRenderer thisImg; // 오브젝트의 이미지
 
-    // 이 오브젝트의 콜리더 가져옴
-    CircleCollider2D circleCollider2D;
+    private GameObject enemy; // 가장 가까운 Player
 
-    // Player태그를 가진 오브젝트를 저장하기 위한 리스트
-    List<GameObject> foundObject;
+    private float speed; // 오브젝트 이동속도
 
-    // 가장 가까운 Player을 저장하기 위한 변수
-    GameObject enemy;
+    private float angle; // 오브젝트 회전
 
-    ParticleSystem particle;
+    private float shortDis;
 
-    float shortDis;
 
-    void Start()
+    /// <summary>
+    /// 각종 게임 세팅
+    /// </summary>
+    void Awake()
     {
-        GameSetting();
-    }
 
-    void GameSetting()
-    {
+        thisImg = GetComponent<SpriteRenderer>();
+
         foundObject = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
 
         speed = 1;
 
-        animator = GetComponent<Animator>();
-
-        circleCollider2D = GetComponent<CircleCollider2D>();
-
         particle = GameObject.Find("Boom").GetComponent<ParticleSystem>();
     }
 
+    /// <summary>
+    /// 그림을 다 그리면 플레이어 위치로 다가감
+    /// </summary>
     void Update()
     {
         if (foundObject[0] != null)
         {
             FindPlayer();
-
-            // 그림을 다 그리면 움직이기 시작함
+            
             if (!GameObject.Find("GameManager").GetComponent<LineMaker>().cheackOne)
             {
-                // 플레이어 위치를 받아옴
+                
                 Vector3 dir = enemy.transform.position - transform.position;
 
-                // 타겟 방향으로 다가감
                 transform.position += dir * speed * Time.deltaTime;
 
-                // 타겟 방향으로 회전함
                 angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
@@ -73,6 +58,9 @@ public class Monster : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 가장 가까운 Player을 찾고, 그 Player을 enemy에 넣음
+    /// </summary>
     void FindPlayer()
     {
 
@@ -90,23 +78,38 @@ public class Monster : MonoBehaviour
             }
         }
     }
-    
+
+    /// <summary>
+    /// 충돌한 오브젝트가 Trap이면 파티클 실행 시키고 코르틴 작동시킴
+    /// </summary>
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Trap")) {
-            particle.transform.position = gameObject.transform.position;
-            gameObject.SetActive(false);
-            particle.Play();
-            StartCoroutine(ComeBack());
+            if (this.gameObject.activeInHierarchy) {
+
+                particle.transform.position = gameObject.transform.position;
+
+                particle.Play();
+
+                StartCoroutine(ComeBack());
+            }
         }
     }
 
+    /// <summary>
+    /// 이 오브젝트 이미지를 없애고 오브젝트를 없애는 코드
+    /// </summary>
     IEnumerator ComeBack()
     {
+        thisImg.sprite = null;
+
         yield return new WaitForSeconds(0.3f);
 
-        particle.transform.position = new Vector3(0, 10, 0);
-
         Destroy(gameObject);
+    }
+
+    void OnDisable()
+    {
+        Debug.Log("파괴됨");
     }
 }

@@ -1,35 +1,32 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour 
 {
-    SpriteRenderer thisImg;
 
-    Sprite change_Icon;
+    private ParticleSystem particle; // 오브젝트 터질때 생기는 파티클
 
-    ParticleSystem particle;
+    private SpriteRenderer thisImg; // 오브젝트 이미지
 
-    // 이 오브젝트의 콜리더 가져옴
-    CircleCollider2D circleCollider2D;
+    private Sprite change_Icon; // 바뀔 이미지
 
-    void Start()
+
+    /// <summary>
+    /// 각종 게임 세팅
+    /// </summary>
+    void Awake()
     {
-
         particle = GameObject.Find("Boom").GetComponent<ParticleSystem>();
 
         thisImg = GetComponent<SpriteRenderer>();
 
         change_Icon = Resources.Load<Sprite>("IMG/GyeongjuDie");
 
-        circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
-    // 이 오브젝트가 -5이하로 내려가면 (0, 4)로 위치 이동시킴
+    /// <summary>
+    /// 이 오브젝트가 -5 이하로 떨어지면 작동
+    /// </summary>
     void Update() 
     {
         Vector2 currentPosition = transform.position;
@@ -38,29 +35,38 @@ public class Player : MonoBehaviour
         
     }
 
-    // 닿은 오브젝트가 Monster이거나 Spike면 죽은걸 알려줌
+    /// <summary>
+    /// 충돌한 오브젝트가 Monster이면 이미지 바꾸고 <br />
+    /// Trap이면 파티클 실행 시키고 코르틴 작동시킴
+    /// </summary>
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Monster"))
-        {
+        if (collision.collider.CompareTag("Monster")) {
             thisImg.sprite = change_Icon;
         }
 
-        if (collision.collider.CompareTag("Trap")) {
-            particle.transform.position = gameObject.transform.position;
-            gameObject.SetActive(false);
-            particle.Play();
-            StartCoroutine(ComeBack());
-        }     
+        if (collision.collider.CompareTag("Trap")) 
+            if (this.gameObject.activeInHierarchy) {
+
+                particle.transform.position = gameObject.transform.position;
+
+                particle.Play();
+
+                StartCoroutine(ComeBack());
+            } 
     }
 
+    /// <summary>
+    /// 이 오브젝트 이미지를 없애고 현제 Player수를 줄이고 이 오브젝트를 없애는 코드
+    /// </summary>
     IEnumerator ComeBack()
     {
+        thisImg.sprite = null;
+
         yield return new WaitForSeconds(0.3f);
 
-        particle.transform.position = new Vector3(0, 10, 0);
+        GameObject.Find("GameManager").GetComponent<Stage>().nPlayer -= 1;
 
         Destroy(gameObject);
     }
-
 }
