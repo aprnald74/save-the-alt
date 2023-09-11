@@ -4,13 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Line
   - Monster
   - Wall
   - Ground
-  - LineFind
   - Trap
-  - Score
   layers:
   - Default
   - TransparentFX
